@@ -1,10 +1,13 @@
 FROM jupyter/scipy-notebook
 MAINTAINER Ian McIntyre <me@ianpmcintyre.com>
 
-# Install as root
+# Change me if you want to build with a different version of OpenCV
+ENV OPENCV_VERSION 3.0.0
+
+# Change to root
 USER root
 
-# OpenCV dependencies
+# Install OpenCV dependencies that are not already there
 RUN apt-get update && apt-get install -y \
 	cmake \
 	libgtk2.0-dev \
@@ -19,14 +22,15 @@ ENV OPENCV_BUILD_DIR=/tmp/opencv/build
 # Prepare OpenCV extra modules
 WORKDIR $OPENCV_CONTRIB_GIT_DIR
 RUN git clone https://github.com/opencv/opencv_contrib.git $OPENCV_CONTRIB_GIT_DIR
-RUN git checkout 3.0.0
+RUN git checkout $OPENCV_VERSION
 
 # Prepare OpenCV
 WORKDIR $OPENCV_GIT_DIR
 RUN git clone https://github.com/opencv/opencv.git $OPENCV_GIT_DIR
-RUN git checkout 3.0.0
+RUN git checkout $OPENCV_VERSION
 
 # Prepare build
+# Python directories specified in the parent image
 WORKDIR $OPENCV_BUILD_DIR
 RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
