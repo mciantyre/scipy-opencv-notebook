@@ -43,7 +43,7 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	$OPENCV_GIT_DIR
 
 # Finish and install
-RUN make && make install && ldconfig
+RUN make -j4  && make install && ldconfig
 
 # Back to the default directory
 WORKDIR /home/$NB_USER/work
