@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook
+FROM jupyter/scipy-notebook:c54800018c2c
 MAINTAINER Ian McIntyre <me@ianpmcintyre.com>
 
 # Change me if you want to build with a different version of OpenCV
@@ -35,11 +35,11 @@ WORKDIR $OPENCV_BUILD_DIR
 RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
 	-D OPENCV_EXTRA_MODULES_PATH=$OPENCV_CONTRIB_GIT_DIR \
-	-D PYTHON3_EXECUTABLE=/opt/conda/bin/python3.5 \
-	-D PYTHON3_LIBRARY=/opt/conda/lib/libpython3.5m.so \
-	-D PYTHON3_INCLUDE_DIR=/opt/conda/include/python3.5m \
-	-D PYTHON3_NUMPY_INCLUDE_DIRS=/opt/conda/lib/python3.5/site-packages/numpy/core/include \
-	-D PYTHON3_PACKAGES_PATH=/opt/conda/lib/python3.5/site-packages \
+	-D PYTHON3_EXECUTABLE=/opt/conda/bin/python3.6 \
+	-D PYTHON3_LIBRARY=/opt/conda/lib/libpython3.6m.so \
+	-D PYTHON3_INCLUDE_DIR=/opt/conda/include/python3.6m \
+	-D PYTHON3_NUMPY_INCLUDE_DIRS=/opt/conda/lib/python3.6/site-packages/numpy/core/include \
+	-D PYTHON3_PACKAGES_PATH=/opt/conda/lib/python3.6/site-packages \
 	$OPENCV_GIT_DIR
 
 # Finish and install

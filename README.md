@@ -30,7 +30,7 @@ plt.imshow(img)		# shows face without box
 #	find /opt -iname *haar*
 face_cascade = cv2.CascadeClassifier('/opt/opencv/data/haarcascades/haarcascade_frontalface_default.xml')
 
-faces = face_cascade.detectMultiScale(img, 1.3, 5)
+faces = face_cascade.detectMultiScale(img, 1.1, 3)
 for (x,y,w,h) in faces:
     cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
     roi = img[y:y+h, x:x+w]
